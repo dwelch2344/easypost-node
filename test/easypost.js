@@ -40,6 +40,14 @@ describe('Base API object', () => {
 
       expect(API.buildHeaders(merge)).to.deep.equal(mergedHeaders);
     });
+
+    it('removes headers when in a browser', () => {
+      const filteredHeaders = { ...DEFAULT_HEADERS };
+      delete filteredHeaders['User-Agent'];
+      delete filteredHeaders['Accept-Encoding'];
+
+      expect(API.buildHeaders()).to.deep.equal(filteredHeaders);
+    });
   });
 
   describe('constructor', () => {
